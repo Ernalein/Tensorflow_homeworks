@@ -11,6 +11,7 @@ class MLP_layer:
         self.weights = np.zeros((n_inputs + 1,n_units))
         self.init_weights(0, 0.2)
         self.activation_func = activation_func
+        self.pre_activations = []
         
     def init_weights(self, mean, std):
         self.weights[0:self.n_inputs, :] = np.random.normal(mean, std, ((self.n_inputs,self.n_units)))
@@ -23,4 +24,6 @@ class MLP_layer:
         net_input = x @ self.weights
         y = self.activation_func(net_input)
         return y
+    
+    #def weights_backward(self, error_signal)
         
