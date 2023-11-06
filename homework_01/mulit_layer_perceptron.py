@@ -21,9 +21,10 @@ class MLP:
             y = layer.forward(y)
         return y
     
-    #def backward()
-        # calculate the first error signal (CCELoss backward)
-        # feed error signal to last layer
-            # claculate cradient for weights (and change them)
-            # calculate error signal vector for next layer
-        # feed error signal to next layer
+    def backward(Loss_func, y_true, y_pred):
+        # error_signal size -> (minibatchsize, n_units)
+        error_signal = Loss_func(y_true, y_pred)
+        for layer in reversed(self.layers):
+            error_signal = layer.backward(error_signal)
+        
+    #def training():

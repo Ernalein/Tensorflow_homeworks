@@ -5,7 +5,8 @@ class Sigmoid:
     def __call__(self, x):
         return 1/(1 + np.exp(-x))
     
-    #def backwards(self, x):
+    def backward(self, x):
+        return (1/(1 + np.exp(-x))) * (1- (1/(1 + np.exp(-x))))
     
 class Softmax:
     
@@ -17,5 +18,6 @@ class CCELoss:
     def __call__(self, y_true, y_pred):
         return -np.sum(y_true * np.log(y_pred + 10**-100))
     
-    #def backwards(self, y_true, y_pred):
-    #   return y_pred - y_true
+    def backward(self, y_true, y_pred):
+        # size? (minibatches,1) or (minibatches,y)?
+        return y_pred - y_true
