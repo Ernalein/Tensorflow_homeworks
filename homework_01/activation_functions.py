@@ -10,17 +10,32 @@ class Sigmoid:
     
 class Softmax:
     
-    def __call__(self, z):
-        return np.exp(z) / np.sum(np.exp(z), axis=1)
+    # not implemented yet
     
-    def backward(self, z):
-        # not implemented yet
-        return z
+    def __call__(self, z):
+        result = np.exp(z) / np.sum(np.exp(z), axis=1)
+        print(f"input_softmax: {z}\noutput_softmax: {result}")
+        return result
+    
+    def backward(self, batch):
+        
+        # batch size (minibatchsize, n_units)
+        new_batch = []
+        for z in batch:
+            new_z = []
+            s = self.__call__(z)
+            for i ,z_i in enumerate(z):
+                new_z[i] = 
+        
+        # result size -> (minibatchsize, n_units, n_inputs))
+        return np.array(result)
     
 class CCELoss:
     
     def __call__(self, y_true, y_pred):
-        return -np.sum(y_true * np.log(y_pred + 10**-100))
+        y_pred[y_pred == 0.0] = 10**-100
+        y_pred[y_pred < 0.0] = np.abs(y_pred[y_pred < 0.0])
+        return -np.sum(y_true * np.log(y_pred))
     
     def backward(self, y_true, y_pred):
         # size (minibatchesize,10)

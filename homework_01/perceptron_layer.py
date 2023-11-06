@@ -35,7 +35,11 @@ class MLP_layer:
         # partial_error size -> (minibatchsize, n_units)
         # stored_net_input size -> (minibatchsize, n_units)
         # error_batches size -> (minibatchsize, n_units)
-        error_batches = partial_error * self.activation_func.backward(self.stored_net_input)
+        if self.activation_func instanceof Softmax:
+            # implement special softmax array dealing
+            # softmax(stored_net_input) size -> (minibatches, n_units, n_inputs)
+        else:
+            error_batches = partial_error * self.activation_func.backward(self.stored_net_input)
         
         # error_batches size -> (minibatchsize, n_units)
         # stored_input size -> (minibatchsize, n_inputs)
