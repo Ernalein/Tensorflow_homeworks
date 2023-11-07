@@ -1,4 +1,5 @@
 import numpy as np
+from tqdm import tqdm
 
 from perceptron_layer import MLP_layer
 from activation_functions import Sigmoid, Softmax, CCELoss
@@ -31,7 +32,7 @@ class MLP:
         
     def training(self, data_X, data_Y, epochs, learning_rate=0.001, loss_func=CCELoss()):
         average_loss = []
-        for epoch in range(epochs):
+        for epoch in tqdm(range(epochs)):
             epoch_loss = []
             for x_batch, y_batch in zip(data_X, data_Y):
                 outputs = self.forward(x_batch)
@@ -39,8 +40,5 @@ class MLP:
                 epoch_loss.append(loss)              
                 self.backward(loss_func, y_batch, outputs, learning_rate)
             average_loss.append(np.mean(epoch_loss))
-            print(epoch_loss)
-            
-        # plot average loss
         
-    #def ploting_loss(self, average_losses, n_epochs):
+        return average_loss
