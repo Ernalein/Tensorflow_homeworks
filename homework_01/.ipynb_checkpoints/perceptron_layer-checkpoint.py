@@ -1,3 +1,4 @@
+
 import numpy as np
 import random
 from activation_functions import Sigmoid, Softmax
@@ -28,7 +29,8 @@ class MLP_layer:
     
     def weights_backward(self, gradients, learning_rate):
         
-        self.weights = self.weights + (learning_rate * gradients)
+        self.weights = self.weights - (learning_rate * gradients)
+        #print(gradients)
         
     def backward(self, partial_error, learning_rate):
         
