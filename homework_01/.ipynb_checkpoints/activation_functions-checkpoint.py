@@ -53,4 +53,5 @@ class CCELoss:
     
     def backward(self, y_true, y_pred):
         # size (minibatchesize,10)
-        return y_pred - y_true
+        # return y_pred - y_true
+        return - y_true/y_pred
